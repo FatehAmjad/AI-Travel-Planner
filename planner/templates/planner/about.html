@@ -1,0 +1,212 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="loading-spinner">
+        <img src="{% static 'logo.jpg' %}" alt="Logo" class="spinner-logo">
+    </div>
+</br></br>
+    <div id="about-content" style="opacity: 0;">
+        <div class="section center-justify" style="margin-top: 100px; margin-left: 15%;">
+            <h1>About TechGeeks</h1>
+            <p>TechGeeks is a passionate team of talented individuals hailing from Curtin University Dubai. With a strong drive to make a difference, they are dedicated to providing innovative solutions that cater to the diverse needs of their clients. Armed with their educational background, the team brings a wealth of knowledge and expertise to the table. They continuously strive to stay at the forefront of technological advancements, delivering cutting-edge solutions to enhance the traveling experience. With a keen eye for detail and a commitment to excellence, TechGeeks creates seamless and user-friendly experiences that exceed expectations. Their collective commitment to making a positive impact drives them to explore new possibilities and push the boundaries of innovation. TechGeeks revolutionizes the way we travel, enhancing the overall customer experience through groundbreaking applications and smart solutions.</p>
+        </div>
+        <div class="section center-justify" style="margin-left: 15%;">
+            <h2>Meet the Team</h2>
+            <div class="team-members">
+                {% for member in team_members %}
+                    <div class="member">
+                        <div class="member-image">
+                            <div class="image-wrapper">
+                                <img src="{% static member.image %}" alt="{{ member.name }}">
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>{{ member.name }}</h3>
+                            <p>{{ member.role }}</p>
+                            <p class="member-details hidden">{{ member.info }}</p>
+                            <div class="social-links">
+                                <a href="{{ member.linkedin }}" target="_blank" rel="noopener">
+                                    <img src="{% static 'linkedin-logo.png' %}" alt="LinkedIn" class="social-logo">
+                                </a>
+                                <a href="{{ member.instagram }}" target="_blank" rel="noopener">
+                                    <img src="{% static 'instagram-logo3.png' %}" alt="Instagram" class="social-logo">
+                                </a>
+                                <a href="{{ member.email }}">
+                                    <img src="{% static 'github1.png' %}" alt="Gmail" class="social-logo">
+                                </a>
+                            </div>
+                            <button class="learn-more-button hide-button">Learn More</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="section center-justify" style="margin-left: 15%;">
+            <h2>Our Vision</h2>
+            <p>TechGeeks is a visionary team with a clear goal of becoming a leader in the industry. They are determined to exceed customer expectations by consistently delivering exceptional solutions and services. With a strong focus on customer satisfaction, TechGeeks aims to provide a seamless and personalized travel planning experience for individuals visiting the United Arab Emirates (UAE). Their website serves as a comprehensive travel planner specifically tailored to the UAE, offering a wide range of services, including itinerary planning, hotel and transportation bookings, and recommendations for local attractions and experiences. By fostering a culture of continuous improvement, TechGeeks is dedicated to staying ahead of the curve, embracing new technologies, and incorporating customer feedback to enhance their offerings and ensure an unparalleled experience for every traveler.</p>
+        </div>
+    </div>
+    <style>
+        body {
+            background-image: url("{% static 'bg2.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #E8BE46;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #about-content {
+            opacity: 0;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            width: 120%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #FFF;
+            border-radius: 8px;
+        }
+        h1, h2, h3, p {
+            color: #FFF;
+        }
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            color: #FFF;
+            border: 1px solid #E8BE46;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .member-image {
+            width: 200px;
+            height: 200px;
+            perspective: 800px;
+        }
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .image-wrapper:hover img {
+            transform: rotateY(180deg);
+        }
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+        #loading-spinner .spinner-logo {
+            width: 225px;
+            height: 150px;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 49% {
+                opacity: 0;
+            }
+            50%, 100% {
+                opacity: 1;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        .learn-more-button {
+            margin-top: 10px;
+            color: #E8BE46;
+            background-color: transparent;
+            border: 1px solid #E8BE46;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .learn-more-button:hover {
+            background-color: #FFA700;
+            color: #FFFFFF;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .social-logo {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .social-logo:hover {
+            opacity: 0.7;
+        }
+        /* Center-justify class */
+        .center-justify {
+            text-align: center;
+        }
+
+        /* Margin-left for sections */
+        .section {
+            margin-left: 20%;
+        }
+    </style>
+    <script>
+        // Wait for the page to fully load
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show the loading spinner
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "flex";
+
+            // Simulate longer loading time
+            setTimeout(function () {
+                // Once the page is loaded, show the content and hide the spinner
+                spinner.style.opacity = "0";
+                spinner.style.pointerEvents = "none";
+                const aboutContent = document.getElementById("about-content");
+                aboutContent.style.opacity = "1";
+
+                // Get all the Learn More buttons
+                const learnMoreButtons = document.querySelectorAll(".learn-more-button");
+                learnMoreButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        const memberInfo = button.parentElement.querySelector(".member-info p.member-details");
+                        memberInfo.classList.toggle("hidden");
+                        if (memberInfo.classList.contains("hidden")) {
+                            button.textContent = "Learn More";
+                        } else {
+                            button.textContent = "Hide";
+                        }
+                    });
+                });
+            }, 3000); // Adjust the duration (in milliseconds) as needed
+        });
+    </script>
+{% endblock %}
+

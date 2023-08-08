@@ -1,0 +1,11 @@
+Django
+django-crispy-forms
+crispy-bootstrap4
+crispy-bootstrap5
+openai
+requests
+pandas
+reportlab
+scikit-learn
+pytz
+xhtml2pdf

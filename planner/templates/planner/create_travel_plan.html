@@ -1,0 +1,353 @@
+{% extends "./base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% load static %}
+    <style>
+        body {
+            background-image: url("{% static 'bg2.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #E8BE46;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #about-content {
+            opacity: 0;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            width: 120%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #FFF;
+            border-radius: 8px;
+        }
+        h1, h2, h3, p {
+            color: #FFF;
+        }
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            color: #FFF;
+            border: 1px solid #E8BE46;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .member-image {
+            width: 200px;
+            height: 200px;
+            perspective: 800px;
+        }
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .image-wrapper:hover img {
+            transform: rotateY(180deg);
+        }
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+        #loading-spinner .spinner-logo {
+            width: 225px;
+            height: 150px;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 49% {
+                opacity: 0;
+            }
+            50%, 100% {
+                opacity: 1;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        .learn-more-button {
+            margin-top: 10px;
+            color: #E8BE46;
+            background-color: transparent;
+            border: 1px solid #E8BE46;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .learn-more-button:hover {
+            background-color: #FFA700;
+            color: #FFFFFF;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .social-logo {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .social-logo:hover {
+            opacity: 0.7;
+        }
+        /* Center-justify class */
+        .center-justify {
+            text-align: center;
+        }
+
+        /* Margin-left for sections */
+        .section {
+            margin-left: 20%;
+        }
+
+        #travel-plan-content {
+            padding: 20px;
+            display: none; /* Initially hide the content */
+        }
+
+        h1 {
+            color: #FFF;
+        }
+
+        label {
+            color: #FFF;
+        }
+
+        .col-md-6 {
+            text-align: left;
+        }
+
+        #travel-image {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        #loading-spinner .spinner-logo {
+            width: 200px;
+            height: 200px;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+            
+        }
+    </style>
+    <div id="loading-spinner">
+        <img src="{% static 'logo.jpg' %}" alt="Logo" class="spinner-logo">
+    </div>
+</br></br></br></br></br></br>
+<div class="section center-justify" style="margin-left: 12%;">
+<div id="travel-plan-content">
+    <div class="row">
+        <div class="section center-justify" style="margin-left: 5%; margin-right: 5%;">
+            <h1 class="title" style="font-family: Perpetua; background-image: repeating-radial-gradient(farthest-side at 5px 5px,#FFC0CB, #FFD700, #FFC0CB);  color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text; ">Create Your Travel Plan</h1>
+            <form action="{% url 'travel_plan' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label for="firstname">First Name:</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Last Name:</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination">Destination:</label>
+                            <input type="text" class="form-control" id="destination" name="destination" required placeholder="UAE City">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" class="form-control" id="age" name="age" required min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget:</label>
+                            <input type="number" class="form-control" id="budget" name="budget" required placeholder="AED">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="places">Where would you like to visit:</label>
+                            <div id="places">
+                                <input type="text" class="form-control" id="place1" name="places[]" required><br>
+                            </div>
+                            <button type="button" onclick="addPlace()">+ Add More</button>
+                        </div>
+                        <script>
+                            let placeCounter = 1;
+
+                            function addPlace() {
+                            placeCounter++;
+
+                            const newPlaceInput = document.createElement("input");
+                            newPlaceInput.type = "text";
+                            newPlaceInput.classList.add("form-control");
+                            newPlaceInput.name = "places[]";
+                            newPlaceInput.required = true;
+
+                            const removeButton = document.createElement("button");
+                            removeButton.type = "button";
+                            removeButton.textContent = "Remove";
+                            removeButton.classList.add("remove-button");
+                            removeButton.onclick = function () {
+                                removePlace(newPlaceInput);
+                            };
+
+                            const div = document.createElement("div");
+                            div.classList.add("button-container");
+                            div.appendChild(newPlaceInput);
+                            div.appendChild(removeButton);
+
+                            document.getElementById("places").appendChild(div);
+                        }
+
+                        function removePlace(placeInput) {
+                            const divToRemove = placeInput.parentElement;
+                            divToRemove.remove();
+                        }
+                        </script>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="no_of_visitors">No. of Visitors:</label>
+                                <select id="no_of_visitors" class="form-control form-control-lg" name="no_of_visitors" required>
+                                    <option value="" selected disabled>Select number of visitors</option>
+                                    {% for i in ""|center:10 %}
+                                        <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        <div class="form-group">
+                            <label for="booked_before">Have you booked a tour with us before?</label>
+                            <div>
+                                <input type="radio" id="yes" name="booked_before" value="yes" required>
+                                <label for="yes">&nbsp;&nbsp;Yes&nbsp;&nbsp;</label>
+                                <input type="radio" id="no" name="booked_before" value="no" required>
+                                <label for="no">&nbsp;&nbsp;No&nbsp;&nbsp;</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="find_about_us">How did you find about us?:</label>
+                            <div>
+                                <input type="radio" id="search_engine" name="find_about_us" value="search_engine" required>
+                                <label for="search_engine">&nbsp;&nbsp;Search Engine&nbsp;&nbsp;</label>
+                                <input type="radio" id="social_media" name="find_about_us" value="social_media" required>
+                                <label for="social_media">&nbsp;&nbsp;Social Media&nbsp;&nbsp;</label>
+                                <input type="radio" id="friend" name="find_about_us" value="friend" required>
+                                <label for="friend">&nbsp;&nbsp;Friend&nbsp;&nbsp;</label>
+                                <input type="radio" id="other" name="find_about_us" value="other" required>
+                                <label for="other">&nbsp;&nbsp;Other&nbsp;&nbsp;</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+
+    <script>
+        // Wait for the page to load completely
+        window.addEventListener('load', function() {
+            // Show the loading spinner
+            document.getElementById('loading-spinner').style.display = 'flex';
+    
+            // Hide the travel plan content
+            document.getElementById('travel-plan-content').style.display = 'none';
+    
+            // Simulate a delay of 3 seconds
+            setTimeout(function() {
+                // Hide the loading spinner
+                document.getElementById('loading-spinner').style.display = 'none';
+    
+                // Show the travel plan content
+                document.getElementById('travel-plan-content').style.display = 'block';
+            }, 3000);
+        });
+         // Function to update the selected value for each select element
+    function updateSelectedValue(selectId, displayId) {
+        const selectElement = document.getElementById(selectId);
+        const displayElement = document.getElementById(displayId);
+        selectElement.addEventListener('change', () => {
+            displayElement.textContent = `Selected: ${selectElement.value}`;
+        });
+    }
+
+    // Call the function for each select element
+    updateSelectedValue('no_of_adults', 'selected_adults');
+    updateSelectedValue('no_of_children', 'selected_children');
+    updateSelectedValue('no_of_events', 'selected_events');
+    </script>
+{% endblock %}

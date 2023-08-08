@@ -1,0 +1,101 @@
+{% extends "planner/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="loading-spinner">
+        <img src="{% static 'logo.jpg' %}" alt="Logo" class="spinner-logo">
+    </div>
+</br></br>
+    <div id="logout-content" style="display: none;">
+        <div class="section">
+            <h2>Logged out successfully.</h2>
+            <div class="border-top pt-3">
+                <a href="{% url 'login' %}" class="btn btn-lg btn-primary">
+                    <img src="{% static 'logo.jpg' %}" alt="Logo" class="button-logo">
+                    Log In again
+                </a>
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            background-image: url("{% static 'bg2.jpg' %}");
+            background-size: cover;
+            color: #FFF;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+        .spinner-logo {
+            width: 220px;
+            height: 150px;
+            animation: blink 1.2s infinite;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark blue section color */
+            color: #FFF;
+        }
+        h2 {
+            color: #FFF;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px; /* Decreased padding for a smaller button */
+            font-size: 18px; /* Decreased font size for a smaller button */
+            color: #FFF;
+            background-color: transparent; /* Darker blue button color */
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #5097A4; /* Darker blue on hover */
+            color: #FFF;
+            transform: scale(1.1); /* Enlarge the button on hover */
+        }
+        .button-logo {
+            width: 80px; /* Increased logo size */
+            height: 80px; /* Increased logo size */
+            margin-right: 10px;
+        }
+        @keyframes blink {
+            0%, 49% {
+                opacity: 0;
+            }
+            50%, 100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+        // Wait for the page to fully load
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show the loading spinner
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "flex";
+
+            // Simulate longer loading time
+            setTimeout(function () {
+                // Once the page is loaded, show the content and hide the spinner
+                spinner.style.display = "none";
+                const logoutContent = document.getElementById("logout-content");
+                logoutContent.style.display = "block";
+            }, 3000); // Adjust the duration (in milliseconds) as needed
+        });
+    </script>
+{% endblock %}

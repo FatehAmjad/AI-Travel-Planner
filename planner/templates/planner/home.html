@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plan My Trip </title>
+
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="icon" href="{% static 'logo.jpg' %}"/>
+    <!-- Bootstrap + Creative Studio main styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/creative-studio.css' %}">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    <div id="loading-spinner">
+        <img src="{% static 'assets/imgs/logo.jpg' %}" alt="Logo" class="spinner-logo">
+    </div>
+    
+    <!-- Page Navigation -->
+    <nav class="navbar custom-navbar navbar-expand-lg navbar-dark" data-spy="affix" data-offset-top="20"style=" background-color: #202A44;" >
+        <div class="container" >
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'assets/imgs/logo.jpg' %}" style="width: 110px; height: auto;">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary btn-sm ml-lg-3" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary btn-sm ml-lg-3" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Of Page Navigation -->
+
+    <!-- Page Header -->
+    <header class="header">
+        <div class="overlay">
+            <h1 class="title" style="font-family: Perpetua; background-image: repeating-radial-gradient(farthest-side at 5px 5px,#FFC0CB, #FFD700, #FFC0CB);  color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text; ">Plan My Trip</h1>
+            <h6 class="subtitle" style="font-family: Perpetua; background-image: repeating-radial-gradient(farthest-side at 5px 5px,#FFC0CB, #FFD700, #FFC0CB);  color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text; ">DIVE INTO THE ADVENTURE </h6>
+        </br></br>
+            <div class="buttons text-center">
+                <a href="{% url 'travel_plan' %}" class="btn btn-outline-light rounded w-lg btn-lg my-1">Get Started</a>
+            </div>
+        </div>
+    </header>
+    <!-- End Of Page Header -->
+
+    <!-- Box -->
+    <div class="box text-center" style=" background-color: #27445C;" >
+        <div class="box-item">
+            <i class="ti-vector"></i>
+            <h6 class="box-title" style="font-family: Perpetua; font-weight: bold; font-size: 1.5em;color: #FFFFFF;">Planning</h6>
+
+            <p style="color: #FFFFFF;">Our website aims to provide you with a comprehensive and user-friendly platform for planning your events. With our step-by-step event plan, you can easily organize and manage every aspect of your event, from start to finish. </p>
+        </div>
+        <div class="box-item">
+            <i class="ti-filter"></i>
+            <h6 class="box-title" style="font-family: Perpetua; font-weight: bold; font-size: 1.5em;color: #FFFFFF;">Customization</h6>
+            <p style="color: #FFFFFF;">We offer you the flexibility to customize your plan according to your specific needs and preferences. We understand that every event is unique, and our platform empowers you to tailor your plan accordingly. </p>
+        </div>
+        <div class="box-item">
+            <i class="ti-mobile"></i>
+            <h6 class="box-title" style="font-family: Perpetua; font-weight: bold; font-size: 1.5em;color: #FFFFFF;">Availability</h6>
+            <p style="color: #FFFFFF;">Can be accessed from any device. You can easily download your plan as a PDF or DOC file for offline access and sharing. Enjoy the convenience and flexibility of planning your event anytime, anywhere.</p>
+        </div>
+    </div>
+    <!-- End of Box -->
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 col-lg-4">
+                    <img src="{% static 'geeks.png' %}" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Creative studio Landing page" class="w-100 img-thumbnail mb-3">
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    
+                    <h6 class="section-subtitle" style="font-size: 1.6em">Crafting Digital Wonders</h6></br>
+                
+                    <p class="section-subtitle" style="font-size: 1.0em">Tech Geeks is an innovative IT company specializing in providing cutting-edge solutions and services. With a team of skilled professionals, we strive to deliver top-notch IT solutions, ranging from software development to network infrastructure management, tailored to meet the unique needs of our clients. Our passion for technology drives us to constantly stay ahead in this ever-evolving industry.</p>
+                </br>
+                    <p class="section-subtitle"  style="font-size: 1.0em">Want to learn more about these amazing individuals and their contributions?</p>
+                </br></br>
+                    <a class="nav-link btn btn-primary btn-sm ml-lg-3" href="{% url 'about' %}" >Know More!</a>
+              
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of About Section -->
+
+    <!-- Fatcs Section -->
+    <section class="has-bg-img bg-img-2">
+        <div class="container text-center">
+            <h6 class="section-subtitle">Let's Dive In and Uncover Some  Fun Facts!</h6>
+            <h6 class="section-title mb-6"></h6>
+            <div class="widget-2">
+                <div class="widget-item">
+                    <i class="ti-cup"></i>
+                    <h6 class="title">100+</h6>
+                    <div class="subtitle">Plan Created</div>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-face-smile"></i>
+                    <h6 class="title">100+</h6>
+                    <div class="subtitle">Happy Clients</div>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-blackboard"></i>
+                    <h6 class="title">20+</h6>
+                    <div class="subtitle">Plan Completed</div>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-comments-smiley"></i>
+                    <h6 class="title">15+</h6>
+                    <div class="subtitle">Comments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonial">
+        <div class="container">
+            <h6 class="section-subtitle text-center">Testimonial</h6>
+            <h6 class="section-title text-center mb-6">What Our Clients Say</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="testimonial-wrapper">
+                        <div class="img-holder">
+                            <img src="{% static 'assets/imgs/avatar-5.jpg' %}" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Creative studio Landing page">
+                        </div>
+                        <div class="body">
+                            <p class="subtitle">"I cannot express how grateful I am for discovering your website! As a busy professional, organizing corporate events can be overwhelming, but your step-by-step event plan has made the process so much easier. The ability to customize the plan according to our specific needs and access it from any device has been a game-changer. I especially love the option to download the plan as a PDF, which allows me to easily collaborate with my team and share updates. Your platform has truly streamlined our event planning process, and I highly recommend it to anyone in need of a reliable and efficient event planning tool. Thank you!"</p>
+                            <h6 class="title">Richard Reb</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-wrapper">
+                        <div class="img-holder">
+                            <img src="{% static 'assets/imgs/avatar-6.jpg' %}" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, Creative studio Landing page">
+                        </div>
+                        <div class="body">
+                            <p class="subtitle">"Your website has completely transformed the way I plan social events! As someone who loves to organize parties, I've tried various event planning tools, but yours stands out. The customizable event plan is a dream come true for me. I can tailor it to match my event themes and add personalized touches. The fact that I can access the plan from any device has been incredibly convenient, allowing me to make changes on the fly. And let's not forget the option to download the plan as a PDF - it's made sharing my event vision with friends and vendors so much simpler. Your platform has taken my events to the next level, and I'm thrilled to continue using it for all my future gatherings. Thank you for creating such a fantastic tool!"</p>
+                            <h6 class="title">John Doe</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Testimonial Section -->
+
+    <section class="has-bg-img py-0">
+        <div class="container">
+            <div class="footer">
+                <div class="footer-lists">
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">ABOUT US</h6>
+                        </li>
+                        <li class="list-body">
+                            <a href="#" class="logo">
+                                <img src="{% static 'geeks.png' %}">
+                                <h6>TechGeeks</h6>
+                            </a>
+                            <p>Tech Geeks is an innovative IT company specializing in providing cutting-edge solutions and services. With a team of skilled professionals, we strive to deliver top-notch IT solutions, ranging from software development to network infrastructure management, tailored to meet the unique needs of our clients. Our passion for technology drives us to constantly stay ahead in this ever-evolving industry.</p>
+                            <p class="mt-3">
+                                Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a class="d-inline text-primary" href="http://www.curtin.ae">Curtin</a>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">Learn more about the team</h6>
+                        </li>
+                        <li class="list-body">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="{% url 'about' %}">About Us</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">CONTACT INFO</h6>
+                        </li>
+                        <li class="list-body">
+                            <p>Contact us and we'll get back to you as soon as possible</p>
+                            <p><i class="ti-location-pin"></i> Academic City, Dubai</p>
+                           
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- core -->
+    <script src="{% static 'assets/vendors/jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.bundle.js' %}"></script>
+
+    <!-- bootstrap affix -->
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.affix.js' %}"></script>
+
+    <!-- Creative Studio js -->
+    <script src="{% static 'assets/js/creative-studio.js' %}"></script>
+
+</body>
+</html>
